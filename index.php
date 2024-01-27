@@ -21,7 +21,7 @@ EOD;
 $doctorBoking = <<<EOD
 <div class="booking">
     <h2>Setting Appointments</h2>
-    <button class="btn"><a href="./doctors.php" class="btn">Set Appointments</a></p></button>
+    <button class="btn"><a href="./add-appointment.php" class="btn">Set Appointments</a></p></button>
 </div>
 EOD;
 

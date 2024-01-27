@@ -9,14 +9,44 @@ class Doctor
         $this->db = $db;
     }
 
+    // public function create($userId, $firstName, $lastName, $specialty)
+    // {
+    //     $conn = $this->db->getConnection();
+
+    //     $stmt = $conn->prepare("INSERT INTO doctors (user_id, first_name, last_name, specialty) VALUES (?, ?, ?, ?)");
+    //     $stmt->bind_param("isss", $userId, $firstName, $lastName, $specialty);
+
+    //     if ($stmt->execute()) {
+    //         return $stmt->insert_id;
+    //     } else {
+    //         echo "Error: " . $stmt->error;
+    //         return false;
+    //     }
+    // }
+
     public function create($userId, $firstName, $lastName, $specialty)
     {
         $conn = $this->db->getConnection();
 
         $stmt = $conn->prepare("INSERT INTO doctors (user_id, first_name, last_name, specialty) VALUES (?, ?, ?, ?)");
-        $stmt->bind_param("isss", $userId, $firstName, $lastName, $specialty);
+        $stmt->execute([$userId, $firstName, $lastName, $specialty]);
 
         if ($stmt->execute()) {
+            $doctorId = $stmt->insert_id;
+
+            $appointmentTimes = ['08:00:00', '09:00:00', '10:00:00', '11:00:00', '12:00:00', '13:00:00', '14:00:00', '15:00:00'];
+
+            $startFromTomorrow = strtotime('tomorrow');
+
+            for ($i = 0; $i < 10; $i++) {
+                foreach ($appointmentTimes as $time) {
+                    $appointmentDateTime = date("Y-m-d {$time}", strtotime("+{$i} days", $startFromTomorrow));
+
+                    $stmt = $conn->prepare("INSERT INTO appointments (user_id, doctor_id, appointment_time) VALUES (NULL, ?, ?)");
+                    $stmt->execute([$doctorId, $appointmentDateTime]);
+                }
+            }
+
             return $stmt->insert_id;
         } else {
             echo "Error: " . $stmt->error;
