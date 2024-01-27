@@ -37,7 +37,7 @@ var_dump($doctorData);
                     <th>Last Name</th>
                     <th>Username</th>
                     <th>Email</th>
-                    <th>Settings</th>
+                    <th>Booking</th>
                 </tr>
             </thead>
             <tbody>
@@ -56,7 +56,7 @@ var_dump($doctorData);
                         <td>
                             <?php echo $doctor["email"]; ?>
                         </td>
-                        <td><a href="./booking.php?id=<?php echo $doctor["doctor_id"]; ?>">Szerkesztés</a></td>
+                        <td><a href="./booking.php?id=<?php echo $doctor["doctor_id"]; ?>">Foglalj idopontot</a></td>
                     </tr>
                 <?php endforeach ?>
             </tbody>
