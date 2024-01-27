@@ -1,35 +1,17 @@
 <?php
-// include_once('classes/Database.php');
-// include_once('controllers/UserController.php');
-// include_once('controllers/DoctorController.php');
-// include_once('controllers/AppointmentController.php');
-
-// // $database = new Database();
-// $database=Database::getInstance();
-// // $conn = $database->getConnection();
-
-// $userHandler = new UserController($database);
-// $doctorHandler = new DoctorController($database);
-// $appointmentHandler = new AppointmentController($database);
-
-// // $userHandler->createUser("john_doe", "john.doe@example.com", password_hash("secret_password", PASSWORD_DEFAULT), "user");
-// // $doctorHandler->createDoctor("Dr. Smith", "Cardiologist");
-// // $appointmentHandler->createAppointment(1, 1, "2024-01-27 14:00:00");
-
-
-// $userHandler->createUser("Amanda", "Seyfried", "amanda", "amanda@example.com", password_hash("secret_password", PASSWORD_DEFAULT), "admin");
-
-// $userHandler->createUser("Nicole", "Wallace", "nicole", "nicole@example.com", password_hash("secret_password", PASSWORD_DEFAULT), "user");
-
-// // Use the user ID to create a doctor associated with that user
-// $doctorHandler->createDoctor("Mia", "Torreto", "mia", "mia@example.com", password_hash("secret_password", PASSWORD_DEFAULT), "doctor", "cardiologist");
-
-
 session_start();
-
-if(!isset($_SESSION["username"])){
+if (!isset($_SESSION["username"])) {
     header("Location: login.php");
 }
+
+include_once("./controllers/UserController.php");
+include_once("./classes/Database.php");
+$database=Database::getInstance();
+
+$userHandler = new UserController($database);
+$currentUsername = $_SESSION["username"];
+$userData = $userHandler->getUserData($currentUsername);
+
 ?>
 
 <!DOCTYPE html>
@@ -61,7 +43,23 @@ if(!isset($_SESSION["username"])){
                 </tr>
             </thead>
             <tbody>
-                
+                <?php
+                ?>
+                <tr>
+                    <td>
+                        <?php echo $userData["first_name"]; ?>
+                    </td>
+                    <td>
+                        <?php echo $userData["last_name"]; ?>
+                    </td>
+                    <td>
+                        <?php echo $userData["username"]; ?>
+                    </td>
+                    <td>
+                        <?php echo $userData["email"]; ?>
+                    </td>
+                    <td></td>
+                </tr>
             </tbody>
         </table>
     </div>
@@ -84,7 +82,7 @@ if(!isset($_SESSION["username"])){
                 </tr>
             </thead>
             <tbody>
-                
+
 
             </tbody>
         </table>
