@@ -1,5 +1,7 @@
 <?php
-echo "Login";
+
+include_once('classes/Database.php');
+$database=Database::getInstance();
 ?>
 
 <!DOCTYPE html>
@@ -12,10 +14,11 @@ echo "Login";
 </head>
 
 <body>
-    <div class="">
-        <h4>
-            <a href="index.php" class=""><button class="btn">BACK</button></a>
-        </h4>
+    <h2>Welcome</h2>
+    <h4>
+        <a href="index.php" class=""><button class="btn">BACK</button></a>
+    </h4>
+    <div class="main-container">
         <div class="form">
             <form action="" method="post">
                 <div class="form-group">

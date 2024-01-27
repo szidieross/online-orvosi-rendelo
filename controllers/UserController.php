@@ -18,5 +18,11 @@ class UserController
         echo "A felhasználó sikeresen létrehozva!: " . $userId;
         return $userId;
     }
+
+    public function loginUser($username, $password) {
+        
+        $user = new User($this->db);
+        $user->loginUser($username, $password);
+    }
 }
 ?>
