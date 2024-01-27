@@ -57,7 +57,6 @@ if (isset($_POST["sign_up"]) && $_SERVER['REQUEST_METHOD'] === "POST") {
         <select name="role" id="role" required>
             <option value="user">User</option>
             <option value="doctor">Doctor</option>
-            <option value="admin">Admin</option>
         </select><br><br>
         <p>if you're a doctor:</p><br />
         Specialty: <input type="text" name="specialty" id=""><br><br>

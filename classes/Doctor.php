@@ -41,4 +41,40 @@ class Doctor
 
         return $doctors;
     }
+
+    public function doctorLogin($username, $password)
+    {
+        echo "hello";
+        $conn = $this->db->getConnection();
+        $sql = "SELECT username, password FROM users
+                INNER JOIN doctors ON doctors.user_id = users.user_id
+                WHERE username = ?";
+        $stmt = $conn->prepare($sql);
+
+        if ($stmt === false) {
+            die("Error preparing query: " . $conn->error);
+        }
+
+        $stmt->bind_param("s", $username);
+
+        if (!$stmt->execute()) {
+            die("Error executing query: " . $conn->error);
+        }
+
+        $result = $stmt->get_result();
+
+        if ($result->num_rows > 0) {
+            $row = $result->fetch_assoc();
+
+            if (password_verify($password, $row['password'])) {
+                echo "Successful doctor login";
+                $_SESSION["username"] = $username;
+                header("Location: index.php"); // Redirect to the doctor's dashboard
+            } else {
+                echo "Incorrect password";
+            }
+        } else {
+            echo "Username not found.";
+        }
+    }
 }

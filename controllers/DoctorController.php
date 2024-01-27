@@ -28,4 +28,10 @@ class DoctorController
         // var_dump($doctors);
         return $doctors;
     }
+
+    public function doctorLogin($username, $password)
+    {
+        $doctor = new Doctor($this->pdo);
+        $doctor->doctorLogin($username, $password);
+    }
 }
