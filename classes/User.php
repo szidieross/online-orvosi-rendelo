@@ -1,20 +1,23 @@
 <?php
-class User {
+class User
+{
     private Database $db;
 
-    public function __construct($db) {
+    public function __construct($db)
+    {
         $this->db = $db;
     }
 
-    public function create($username, $email, $password, $role) {
+    public function create($name, $username, $email, $password, $role)
+    {
         $conn = $this->db->getConnection();
-        $stmt = $conn->prepare("INSERT INTO users (username, email, password, role) VALUES (?, ?, ?, ?)");
-        $stmt->execute([$username, $email, $password, $role]);
-        
-        $lastInsertId = $conn->insert_id;
-        echo "lastInsertId: $lastInsertId";
+        $stmt = $conn->prepare("INSERT INTO users (name, username, email, password, role) VALUES (?, ?, ?, ?, ?)");
+        $stmt->execute([$name, $username, $email, $password, $role]);
 
-        return $lastInsertId;
+        $userId = $conn->insert_id;
+        echo "lastInsertId: $userId";
+
+        return $userId;
     }
 }
 ?>

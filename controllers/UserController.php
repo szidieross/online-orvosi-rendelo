@@ -1,5 +1,6 @@
 <?php
-include("classes/User.php");
+include_once("classes/User.php");
+include_once('controllers/DoctorController.php');
 class UserController
 {
     private $db;
@@ -9,18 +10,13 @@ class UserController
         $this->db = $db;
     }
 
-    public function createUser($username, $email, $password, $role)
+    public function createUser($name, $username, $email, $password, $role)
     {
         $user = new User($this->db);
-        $userId = $user->create($username, $email, $password, $role);
-
-        if ($role == 'doctor') {
-
-            $doctorHandler = new DoctorController($this->db);
-            $doctorHandler->createDoctor($userId, "John Doe", "Cardiologist");
-        }
+        $userId = $user->create($name, $username, $email, $password, $role);
 
         echo "A felhasználó sikeresen létrehozva!: " . $userId;
+        return $userId;
     }
 }
 ?>

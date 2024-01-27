@@ -1,6 +1,6 @@
 <?php
 
-include('classes/Appointment.php');
+include_once('classes/Appointment.php');
 
 class AppointmentController {
     private $pdo;
