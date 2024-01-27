@@ -50,7 +50,7 @@ class Database
         if ($this->conn->multi_query($config)) {
             do {
             } while ($this->conn->next_result());
-            echo "Adatbázis sikeresen inicializálva!";
+            // echo "Adatbázis sikeresen inicializálva!";
         } else {
             die("Hiba az adatbázis inicializálása során: " . $this->conn->error);
         }

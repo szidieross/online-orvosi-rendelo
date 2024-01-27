@@ -6,7 +6,7 @@ if (!isset($_SESSION["username"])) {
 
 include_once("./controllers/UserController.php");
 include_once("./classes/Database.php");
-$database=Database::getInstance();
+$database = Database::getInstance();
 $currentUsername = $_SESSION["username"];
 $userHandler = new UserController($database);
 $userData = $userHandler->getUserData($currentUsername);
@@ -21,14 +21,12 @@ $userData = $userHandler->getUserData($currentUsername);
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="./assets/styles/general.css">
+    <link rel="stylesheet" href="./assets/styles.css">
 </head>
 
 <body>
-    <form action="" method="POST" class="">
-        <input type="hidden" name="username" value="" />
-        <button type="submit" name="logout" value="" class="btn">Log Out</button>
-    </form>
+    <td><a href="./logout.php"><button>Logout</button></a></td>
+
     <div class="booking">
         <h2>Personal Data</h2>
         <table class="">
@@ -64,7 +62,7 @@ $userData = $userHandler->getUserData($currentUsername);
     </div>
     <div class="booking">
         <h2>Want an Appointment?</h2>
-        <button class="btn"><a href="./booking.php" class="btn">Book Appointment</a></p></button>
+        <button class="btn"><a href="./doctors.php" class="btn">Book Appointment</a></p></button>
     </div>
 
     <div class="booking">

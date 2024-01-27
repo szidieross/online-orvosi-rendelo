@@ -19,4 +19,13 @@ class DoctorController
 
         echo "Az orvos sikeresen létrehozva!";
     }
+
+    public function getAllDoctors()
+    {
+        $doctor = new Doctor($this->pdo);
+        $doctors = $doctor->getAllDoctors();
+        // echo "<pre>";
+        // var_dump($doctors);
+        return $doctors;
+    }
 }
