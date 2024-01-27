@@ -11,6 +11,20 @@ $currentUsername = $_SESSION["username"];
 $userHandler = new UserController($database);
 $userData = $userHandler->getUserData($currentUsername);
 
+$userBoking = <<<EOD
+<div class="booking">
+    <h2>Want an Appointment?</h2>
+    <button class="btn"><a href="./doctors.php" class="btn">Book Appointment</a></p></button>
+</div>
+EOD;
+
+$doctorBoking = <<<EOD
+<div class="booking">
+    <h2>Setting Appointments</h2>
+    <button class="btn"><a href="./doctors.php" class="btn">Set Appointments</a></p></button>
+</div>
+EOD;
+
 ?>
 
 <!DOCTYPE html>
@@ -60,11 +74,13 @@ $userData = $userHandler->getUserData($currentUsername);
             </tbody>
         </table>
     </div>
-    <div class="booking">
-        <h2>Want an Appointment?</h2>
-        <button class="btn"><a href="./doctors.php" class="btn">Book Appointment</a></p></button>
-    </div>
 
+    <?php if (isset($_SESSION["doctor"])) {
+        echo $doctorBoking;
+    } else {
+        echo $userBoking;
+    }
+    ?>
     <div class="booking">
         <h2>Appointments</h2>
 

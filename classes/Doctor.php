@@ -36,8 +36,6 @@ class Doctor
         while ($row = $result->fetch_assoc()) {
             $doctors[] = $row;
         }
-        // echo "<pre>";
-        // var_dump($doctors);
 
         return $doctors;
     }
@@ -69,7 +67,8 @@ class Doctor
             if (password_verify($password, $row['password'])) {
                 echo "Successful doctor login";
                 $_SESSION["username"] = $username;
-                header("Location: index.php"); // Redirect to the doctor's dashboard
+                $_SESSION["doctor"] = "doctor";
+                header("Location: index.php");
             } else {
                 echo "Incorrect password";
             }
