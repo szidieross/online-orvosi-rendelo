@@ -1,18 +1,26 @@
 <?php
+include("classes/User.php");
+class UserController
+{
+    private $db;
 
-class UserController {
-    private $pdo;
-
-    public function __construct($pdo) {
-        $this->pdo = $pdo;
+    public function __construct($db)
+    {
+        $this->db = $db;
     }
 
-    public function createUser($username, $email, $password) {
-        // A User objektum létrehozása és adatbázisba való mentése
-        $user = new User($this->pdo);
-        $user->create($username, $email, $password);
+    public function createUser($username, $email, $password, $role)
+    {
+        $user = new User($this->db);
+        $userId = $user->create($username, $email, $password, $role);
 
-        // Egyéb teendők, pl. visszajelzések, stb.
-        echo "A felhasználó sikeresen létrehozva!";
+        if ($role == 'doctor') {
+
+            $doctorHandler = new DoctorController($this->db);
+            $doctorHandler->createDoctor($userId, "John Doe", "Cardiologist");
+        }
+
+        echo "A felhasználó sikeresen létrehozva!: " . $userId;
     }
 }
+?>

@@ -1,15 +1,18 @@
 <?php
 
-class Doctor {
+class Doctor
+{
     private $db;
 
-    public function __construct($db) {
+    public function __construct($db)
+    {
         $this->db = $db;
     }
 
-    public function create($name, $specialty) {
+    public function create($userId, $name, $specialty)
+    {
         $conn = $this->db->getConnection();
-        $stmt = $conn->prepare("INSERT INTO doctors (name, specialty) VALUES (?, ?)");
-        $stmt->execute([$name, $specialty]);
+        $stmt = $conn->prepare("INSERT INTO doctors (user_id,name, specialty) VALUES (?, ?, ?)");
+        $stmt->execute([$userId, $name, $specialty]);
     }
 }

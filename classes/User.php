@@ -1,7 +1,6 @@
 <?php
-
 class User {
-    private $db;
+    private Database $db;
 
     public function __construct($db) {
         $this->db = $db;
@@ -9,7 +8,13 @@ class User {
 
     public function create($username, $email, $password, $role) {
         $conn = $this->db->getConnection();
-        $stmt = $conn->prepare("INSERT INTO users (username, email, password) VALUES (?, ?, ?)");
-        $stmt->execute([$username, $email, $password]);
+        $stmt = $conn->prepare("INSERT INTO users (username, email, password, role) VALUES (?, ?, ?, ?)");
+        $stmt->execute([$username, $email, $password, $role]);
+        
+        $lastInsertId = $conn->insert_id;
+        echo "lastInsertId: $lastInsertId";
+
+        return $lastInsertId;
     }
 }
+?>

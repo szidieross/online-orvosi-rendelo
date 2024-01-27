@@ -11,24 +11,24 @@ class Database
 
     public function initializeDatabase()
     {
-        $conn = new mysqli($this->host, $this->username, $this->password);
+        $this->conn = new mysqli($this->host, $this->username, $this->password);
 
         $sql = "CREATE DATABASE IF NOT EXISTS $this->database";
 
-        if ($conn->query($sql) === false) {
+        if ($this->conn->query($sql) === false) {
             die("Hiba az adatbázis ($this->database) létrehozásában");
         }
 
-        $conn->select_db($this->database);
+        $this->conn->select_db($this->database);
 
         $config = file_get_contents(SCHEMA_PATH);
 
-        if ($conn->multi_query($config)) {
+        if ($this->conn->multi_query($config)) {
             do {
-            } while ($conn->next_result());
+            } while ($this->conn->next_result());
             echo "Adatbázis sikeresen inicializálva!";
         } else {
-            die("Hiba az adatbázis inicializálása során: " . $conn->error);
+            die("Hiba az adatbázis inicializálása során: " . $this->conn->error);
         }
     }
 
