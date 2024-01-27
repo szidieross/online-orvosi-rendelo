@@ -22,6 +22,17 @@ class Database
         return self::$instance;
     }
 
+    public function prepare($query)
+    {
+        $stmt = $this->conn->prepare($query);
+
+        if (!$stmt) {
+            die("Hiba a lekérdezés előkészítésekor: " . $this->conn->error);
+        }
+
+        return $stmt;
+    }
+
     private function initializeDatabase()
     {
         $this->conn = new mysqli($this->host, $this->username, $this->password);

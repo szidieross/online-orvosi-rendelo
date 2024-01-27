@@ -24,25 +24,38 @@ class User
         }
     }
 
-    public function loginUser($username, $password) {
+    public function loginUser($username, $password)
+    {
         $conn = $this->db->getConnection();
-        $stmt = $conn->prepare("SELECT * FROM users WHERE username = ?");
+        $sql = "SELECT username, password FROM users WHERE username = ?";
+        $stmt = $conn->prepare($sql);
+
+        if ($stmt === false) {
+            die("Hiba a lekerdezes elokeszitese soran: " . $conn->error);
+        }
+
         $stmt->bind_param("s", $username);
-        $stmt->execute();
+
+        if (!$stmt->execute()) {
+            die("Hiba a lekerdezes soran: " . $conn->error);
+        }
 
         $result = $stmt->get_result();
 
         if ($result->num_rows > 0) {
-            $user = $result->fetch_assoc();
-            if (password_verify($password, $user['password'])) {
-                $_SESSION["username"]=$username;
-                echo "Sikeres bejelentkezés";
+            $row = $result->fetch_assoc();
+
+            if (password_verify($password, $row['password'])) {
+                echo "Sikeres bejelentkezes";
+                $_SESSION["username"] = $username;
+                header("Location: index.php");
             } else {
-                echo "Érvénytelen jelszó";
+                echo "Hibas jelszo";
             }
         } else {
-            echo "Felhasználó nem található";
+            echo "Felhasznalonev nem talalhato.";
         }
     }
+
 }
 ?>
