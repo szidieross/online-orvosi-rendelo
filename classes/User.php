@@ -13,7 +13,7 @@ class User
     {
         $conn = $this->db->getConnection();
         $stmt = $conn->prepare("INSERT INTO users (first_name, last_name, username, email, password, role) VALUES (?, ?, ?, ?, ?, ?)");
-        $stmt->bind_param("ssssss", $firstName, $lastName, $username, $email, $hashedPassword, $role);
+        $stmt->bind_param("ssssss", $firstName, $lastName, $username, $email, $password, $role);
 
         if ($stmt->execute()) {
             $userId = $conn->insert_id;

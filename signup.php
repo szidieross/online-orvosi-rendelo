@@ -1,6 +1,7 @@
 <?php
 include_once('classes/Database.php');
 include_once('controllers/UserController.php');
+include_once('controllers/DoctorController.php');
 $database = Database::getInstance();
 
 if (isset($_POST["sign_up"]) && $_SERVER['REQUEST_METHOD'] === "POST") {
@@ -9,17 +10,19 @@ if (isset($_POST["sign_up"]) && $_SERVER['REQUEST_METHOD'] === "POST") {
     $lastName = $_POST["last_name"];
     $username = $_POST["username"];
     $email = $_POST["email"];
-    if ($_POST["password"] == $_POST["confirmPassword"]) {
-        $password = password_hash($_POST["password"], PASSWORD_DEFAULT);
-    } else {
-        echo "jelszo nem jo";
-    }
+    $rawPassword = $_POST["password"];
+    $password = password_hash($rawPassword, PASSWORD_DEFAULT);
     $role = $_POST["role"];
+    $specialty = $_POST["specialty"];
 
     $userHandler = new UserController($database);
+    $doctorHandler = new DoctorController($database);
 
-    $userHandler->createUser($firstName, $lastName, $username, $email, $password, $role);
-
+    if ($role == "doctor") {
+        $doctorHandler->createDoctor($firstName, $lastName, $username, $email, $password, $role, $specialty);
+    } else {
+        $userHandler->createUser($firstName, $lastName, $username, $email, $password, $role);
+    }
 }
 
 ?>
@@ -52,6 +55,8 @@ if (isset($_POST["sign_up"]) && $_SERVER['REQUEST_METHOD'] === "POST") {
             <option value="doctor">Doctor</option>
             <option value="admin">Admin</option>
         </select><br><br>
+        <p>if you're a doctor:</p><br />
+        Specialty: <input type="text" name="specialty" id=""><br><br>
         <input type="submit" name="sign_up" value="Sign Up">
     </form>
     <p>Already have an account? <a href="login.php"> <button class="btn">Sign in</button></a></p>
