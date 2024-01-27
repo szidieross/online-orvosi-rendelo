@@ -1,4 +1,5 @@
 <?php
+define('SCHEMA_PATH', 'C:/xampp/htdocs/2023/php/projekt/online-orvosi-rendelo/config.sql');
 
 class Database
 {
@@ -20,7 +21,15 @@ class Database
 
         $conn->select_db($this->database);
 
-        echo "Adatbázis ($this->database) sikeresen létrehozva";
+        $config = file_get_contents(SCHEMA_PATH);
+
+        if ($conn->multi_query($config)) {
+            do {
+            } while ($conn->next_result());
+            echo "Adatbázis sikeresen inicializálva!";
+        } else {
+            die("Hiba az adatbázis inicializálása során: " . $conn->error);
+        }
     }
 
     public function getConnection()
@@ -34,3 +43,4 @@ class Database
         return $conn;
     }
 }
+?>

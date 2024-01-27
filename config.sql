@@ -1,4 +1,4 @@
-CREATE TABLE users (
+CREATE TABLE IF NOT EXISTS users (
     user_id INT PRIMARY KEY AUTO_INCREMENT,
     username VARCHAR(50),
     email VARCHAR(50),
@@ -6,7 +6,7 @@ CREATE TABLE users (
     role VARCHAR(20) NOT NULL
 );
 
-CREATE TABLE doctors (
+CREATE TABLE IF NOT EXISTS doctors (
     doctor_id INT PRIMARY KEY AUTO_INCREMENT,
     user_id INT,
     name VARCHAR(50),
@@ -14,7 +14,7 @@ CREATE TABLE doctors (
     FOREIGN KEY (user_id) REFERENCES users(user_id)
 );
 
-CREATE TABLE appointments (
+CREATE TABLE IF NOT EXISTS appointments (
     appointment_id INT PRIMARY KEY AUTO_INCREMENT,
     user_id INT,
     doctor_id INT,
