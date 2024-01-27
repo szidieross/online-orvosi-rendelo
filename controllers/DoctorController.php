@@ -10,12 +10,12 @@ class DoctorController
         $this->pdo = $pdo;
     }
 
-    public function createDoctor($name, $username, $email, $password, $role, $specialty)
+    public function createDoctor($firstName, $lastName, $username, $email, $password, $role, $specialty)
     {
         $userHandler = new UserController($this->pdo);
-        $userId = $userHandler->createUser($name, $username, $email, $password, $role);
+        $userId = $userHandler->createUser($firstName, $lastName, $username, $email, $password, $role);
         $doctor = new Doctor($this->pdo);
-        $doctor->create($userId, $name, $specialty);
+        $doctor->create($userId, $firstName, $lastName, $specialty);
 
         echo "Az orvos sikeresen létrehozva!";
     }

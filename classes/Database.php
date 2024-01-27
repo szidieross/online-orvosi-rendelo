@@ -3,13 +3,26 @@ define('SCHEMA_PATH', 'C:/xampp/htdocs/2023/php/projekt/online-orvosi-rendelo/co
 
 class Database
 {
+    private static $instance;
     private $host = "localhost";
     private $username = "root";
     private $password = "";
     private $database = "online_orvosi_rendelo";
     private $conn;
 
-    public function initializeDatabase()
+    private function __construct()
+    {
+    }
+
+    public static function getInstance(){
+        if(!self::$instance){
+            self::$instance=new self();
+            self::$instance->initializeDatabase();
+        }
+        return self::$instance;
+    }
+
+    private function initializeDatabase()
     {
         $this->conn = new mysqli($this->host, $this->username, $this->password);
 

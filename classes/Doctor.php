@@ -9,11 +9,11 @@ class Doctor
         $this->db = $db;
     }
 
-    public function create($userId, $name, $specialty)
+    public function create($userId, $firstName, $lastName, $specialty)
     {
         $conn = $this->db->getConnection();
 
-        $stmt = $conn->prepare("INSERT INTO doctors (user_id, name, specialty) VALUES (?, ?, ?)");
-        $stmt->execute([$userId, $name, $specialty]);
+        $stmt = $conn->prepare("INSERT INTO doctors (user_id, first_name, last_name, specialty) VALUES (?, ?, ?, ?)");
+        $stmt->execute([$userId, $firstName, $lastName, $specialty]);
     }
 }

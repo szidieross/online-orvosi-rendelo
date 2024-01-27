@@ -8,11 +8,11 @@ class User
         $this->db = $db;
     }
 
-    public function create($name, $username, $email, $password, $role)
+    public function create($firstName, $lastName, $username, $email, $password, $role)
     {
         $conn = $this->db->getConnection();
-        $stmt = $conn->prepare("INSERT INTO users (name, username, email, password, role) VALUES (?, ?, ?, ?, ?)");
-        $stmt->execute([$name, $username, $email, $password, $role]);
+        $stmt = $conn->prepare("INSERT INTO users (first_name, last_name, username, email, password, role) VALUES (?, ?, ?, ?, ?, ?)");
+        $stmt->execute([$firstName, $lastName, $username, $email, $password, $role]);
 
         $userId = $conn->insert_id;
         echo "lastInsertId: $userId";
