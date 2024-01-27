@@ -38,19 +38,7 @@ if (isset($_POST['update']) && $_SERVER["REQUEST_METHOD"] == "POST") {
     $username = $_POST["username"];
     $email = $_POST["email"];
 
-    // Update user data
-    $sql = "UPDATE users SET first_name=?, last_name=?, username=?, email=? WHERE user_id=?";
-    $stmt = $database->prepare($sql);
-
-    $stmt->bind_param("ssssi", $firstName, $lastName, $username, $email, $id);
-
-    if (!$stmt->execute()) {
-        die("Hiba az adat frissítése során: " . $stmt->error);
-    }
-
-    $stmt->close();
-
-    header("Location: index.php");
+    $userHandler->updateUserData($firstName, $lastName, $username, $email, $id);
 }
 ?>
 

@@ -46,76 +46,25 @@ class UserController
     public function getUserDataById($userId)
     {
         $conn = $this->db->getConnection();
-        // $stmt = $conn->prepare("SELECT * FROM users WHERE user_id = ?");
-        // $stmt->bind_param("s", $userId);
-        // $stmt->execute();
 
-        // $result = $stmt->get_result();
-
-        // if ($result->num_rows > 0) {
-        //     $user = $result->fetch_assoc();
-        //     return $user;
-        // } else {
-        //     return null;
-        // }
-
-        echo "ID" . $userId;
-
-        $sql = "SELECT nev, atlag, szak from hallgatok WHERE id=?";
-
-        $stmt = $conn->prepare($sql);
-
-        if ($stmt === false) {
-            die("Hiba a SELECT lekérdezés előkészítése során: " . $conn->error);
-        }
-
-        $stmt->bind_param("i", $userId);
-
-        if (!$stmt->execute()) {
-            die("Hiba a SELECT lekérdezés során: " . $conn->error);
-        }
-
-        $stmt->bind_result($nev, $atlag, $szak);
-
-        $stmt->fetch();
-        $stmt->close();
     }
 
-    public function updateUserData($userId)
+    public function updateUserData($firstName, $lastName, $username, $email, $userId)
     {
         $conn = $this->db->getConnection();
-        $sql = "SELECT nev, atlag, szak from hallgatok WHERE id=?";
 
+        $sql = "UPDATE users SET first_name=?, last_name=?, username=?, email=? WHERE user_id=?";
         $stmt = $conn->prepare($sql);
 
-        if ($stmt === false) {
-            die("Hiba a SELECT lekérdezés előkészítése során: " . $conn->error);
-        }
-
-        $stmt->bind_param("i", $userId);
+        $stmt->bind_param("ssssi", $firstName, $lastName, $username, $email, $userId);
 
         if (!$stmt->execute()) {
-            die("Hiba a SELECT lekérdezés során: " . $conn->error);
+            die("Hiba az adat frissítése során: " . $stmt->error);
         }
 
-        // $stmt->bind_result($nev, $atlag, $szak);
-
-        $stmt->fetch();
         $stmt->close();
 
-        // $conn = $this->db->getConnection();
-        // $stmt = $conn->prepare("SELECT * FROM users WHERE user_id = ?");
-        // $stmt->bind_param("s", $userId);
-        // $stmt->execute();
-
-        // $result = $stmt->get_result();
-
-        // if ($result->num_rows > 0) {
-        //     $user = $result->fetch_assoc();
-        //     return $user;
-        // } else {
-        //     return null;
-        // }
+        header("Location: index.php");
     }
 }
 ?>
