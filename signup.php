@@ -1,8 +1,13 @@
 <?php
+session_start();
 include_once('classes/Database.php');
 include_once('controllers/UserController.php');
 include_once('controllers/DoctorController.php');
 $database = Database::getInstance();
+
+if(isset($_SESSION["username"])){
+    header("Location: index.php");
+}
 
 if (isset($_POST["sign_up"]) && $_SERVER['REQUEST_METHOD'] === "POST") {
 

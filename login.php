@@ -1,49 +1,19 @@
 <?php
+session_start();
 include_once('classes/Database.php');
 include_once('controllers/UserController.php');
 $database = Database::getInstance();
 
-if (isset($_POST["signup"]) && $_SERVER['REQUEST_METHOD'] === "POST") {
+if(isset($_SESSION["username"])){
+    header("Location: index.php");
+}
 
+if (isset($_POST["signup"]) && $_SERVER['REQUEST_METHOD'] === "POST") {
     $username = $_POST["username"];
     $password = $_POST["password"];
 
-    if (empty($username) || empty($password)) {
-        die("Hiba: a mezok kitoltese kotelezo!");
-    }
-
-    $sql = "SELECT username, password FROM users WHERE username = ?";
-
-    $stmt = $database->prepare($sql);
-
-    if ($stmt === false) {
-        die("Hiba a lekerdezes elokeszitese soran: " . $conn->error);
-    }
-
-    $stmt->bind_param("s", $username);
-
-    if (!$stmt->execute()) {
-        die("Hiba a lekerdezes soran: " . $conn->error);
-    }
-
-    $result = $stmt->get_result();
-
-    if ($result->num_rows > 0) {
-        $row = $result->fetch_assoc();
-
-        if (password_verify($password, $row['password'])) {
-            echo "Sikeres bejelentkezes";
-
-            $_SESSION["username"] = $username;
-            // setcookie("username", $username, time() + (86400 * 30));
-
-            header("Location: index.php");
-        } else {
-            echo "Hibas jelszo";
-        }
-    } else {
-        echo "Felhasznalonev nem talalhato.";
-    }
+    $userHandler = new UserController($database);
+    $userHandler->loginUser($username,$password);
 }
 ?>
 
