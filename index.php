@@ -7,9 +7,8 @@ if (!isset($_SESSION["username"])) {
 include_once("./controllers/UserController.php");
 include_once("./classes/Database.php");
 $database=Database::getInstance();
-
-$userHandler = new UserController($database);
 $currentUsername = $_SESSION["username"];
+$userHandler = new UserController($database);
 $userData = $userHandler->getUserData($currentUsername);
 
 ?>
@@ -58,7 +57,7 @@ $userData = $userHandler->getUserData($currentUsername);
                     <td>
                         <?php echo $userData["email"]; ?>
                     </td>
-                    <td></td>
+                    <td><a href="./updateUser.php?id=<?php echo $userData["user_id"]; ?>">Szerkesztés</a></td>
                 </tr>
             </tbody>
         </table>
