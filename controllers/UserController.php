@@ -16,4 +16,3 @@ class UserController {
         echo "A felhasználó sikeresen létrehozva!";
     }
 }
-?>

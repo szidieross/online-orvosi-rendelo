@@ -1,17 +1,21 @@
 <?php
-class Database {
+class Database
+{
     private $host = "localhost";
     private $username = "root";
     private $password = "";
     private $database = "online_orvosi_rendelo";
     private $conn;
 
-    public function __construct() {
+    public function __construct()
+    {
         try {
-            $this->conn = new PDO("mysql:host=$this->host;dbname=$this->database", $this->username, $this->password);
+            $this->conn = new PDO("mysql:host=$this->host;", $this->username, $this->password);
             $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-            // Beolvassuk a config.sql fájlt és lefuttatjuk az SQL kódot
+            $this->createDatabaseIfNotExists();
+            $this->conn->exec("USE $this->database");
+
             $sql = file_get_contents('config.sql');
             $this->conn->exec($sql);
 
@@ -21,8 +25,14 @@ class Database {
         }
     }
 
-    public function getConnection() {
+    private function createDatabaseIfNotExists()
+    {
+        $sql = "CREATE DATABASE IF NOT EXISTS $this->database";
+        $this->conn->exec($sql);
+    }
+
+    public function getConnection()
+    {
         return $this->conn;
     }
 }
-?>
