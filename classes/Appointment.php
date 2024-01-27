@@ -8,8 +8,8 @@ class Appointment {
     }
 
     public function create($userId, $doctorId, $appointmentTime) {
-        $connection = $this->db->getConnection();
-        $stmt = $connection->prepare("INSERT INTO appointments (user_id, doctor_id, appointment_time) VALUES (?, ?, ?)");
+        $conn = $this->db->getConnection();
+        $stmt = $conn->prepare("INSERT INTO appointments (user_id, doctor_id, appointment_time) VALUES (?, ?, ?)");
         $stmt->execute([$userId, $doctorId, $appointmentTime]);
     }
 }

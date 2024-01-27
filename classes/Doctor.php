@@ -8,8 +8,8 @@ class Doctor {
     }
 
     public function create($name, $specialty) {
-        $connection = $this->db->getConnection();
-        $stmt = $connection->prepare("INSERT INTO doctors (name, specialty) VALUES (?, ?)");
+        $conn = $this->db->getConnection();
+        $stmt = $conn->prepare("INSERT INTO doctors (name, specialty) VALUES (?, ?)");
         $stmt->execute([$name, $specialty]);
     }
 }
