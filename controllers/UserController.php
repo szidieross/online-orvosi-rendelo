@@ -61,9 +61,9 @@ class UserController
             die("Hiba az adat frissítése során: " . $stmt->error);
         }
 
+        $_SESSION["username"] = $username;
+        echo "Changes saved.";
         $stmt->close();
-        
-        header("Location: index.php");
     }
 }
 ?>

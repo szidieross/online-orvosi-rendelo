@@ -35,14 +35,11 @@ if (isset($_POST['update']) && $_SERVER["REQUEST_METHOD"] == "POST") {
     $lastName = $_POST["last_name"];
     $username = $_POST["username"];
     $email = $_POST["email"];
-    $userExists = $userHandler->getUserData($username);
 
     if (empty($firstName) || empty($lastName) || empty($username) || empty($email)) {
         echo "All fields are required!";
     } else if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
         echo "Invalid email format!";
-    } elseif ($userExists) {
-        echo "This username is already taken, please choose another one.";
     } else if (isset($_SESSION['doctor'])) {
         $doctorHandler->updateDoctorData($firstName, $lastName, $id);
         $userHandler->updateUserData($firstName, $lastName, $username, $email, $id);
@@ -74,7 +71,7 @@ if (isset($_POST['update']) && $_SERVER["REQUEST_METHOD"] == "POST") {
             Last Name: <input type="text" name="last_name" value="<?php echo $lastName; ?>" required><br><br>
             Username: <input type="text" name="username" value="<?php echo $username; ?>" required><br><br>
             Email: <input type="email" name="email" value="<?php echo $email; ?>" required><br><br>
-            <input type="submit" name="update" class="button" value="Ment">
+            <input type="submit" name="update" class="button" value="Save changes">
         </form>
     </div>
 </body>
