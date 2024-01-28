@@ -45,7 +45,6 @@ if (isset($_POST["doctor_login"]) && $_SERVER['REQUEST_METHOD'] === "POST") {
         <div class="form" id="user-form">
             <h2>Login as a User</h2>
             <form action="" method="post">
-                <!-- User Login Form -->
                 <div class="form-group">
                     <label>Username</label>
                     <input type="text" name="username" class="form-control">
@@ -64,7 +63,6 @@ if (isset($_POST["doctor_login"]) && $_SERVER['REQUEST_METHOD'] === "POST") {
         <div class="form" id="doctor-form" style="display:none;">
             <h2>Login as a Doctor</h2>
             <form action="" method="post">
-                <!-- Doctor Login Form -->
                 <div class="form-group">
                     <label>Username</label>
                     <input type="text" name="username" class="form-control">

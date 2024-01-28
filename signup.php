@@ -4,7 +4,7 @@ include_once('controllers/UserController.php');
 include_once('controllers/DoctorController.php');
 $database = Database::getInstance();
 
-if(isset($_SESSION["username"])){
+if (isset($_SESSION["username"])) {
     header("Location: index.php");
 }
 
@@ -22,7 +22,10 @@ if (isset($_POST["sign_up"]) && $_SERVER['REQUEST_METHOD'] === "POST") {
     $userHandler = new UserController($database);
     $doctorHandler = new DoctorController($database);
 
-    if ($role == "doctor") {
+    $userExists = $userHandler->getUserData($username);
+    if ($userExists) {
+        echo "A felhasznalonev mar letezik, kerem valasszon masikat!";
+    } else if ($role == "doctor") {
         $doctorHandler->createDoctor($firstName, $lastName, $username, $email, $password, $role, $specialty);
     } else {
         $userHandler->createUser($firstName, $lastName, $username, $email, $password, $role);
