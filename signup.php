@@ -1,4 +1,5 @@
 <?php
+session_start();
 include_once('classes/Database.php');
 include_once('controllers/UserController.php');
 include_once('controllers/DoctorController.php');
@@ -15,20 +16,30 @@ if (isset($_POST["sign_up"]) && $_SERVER['REQUEST_METHOD'] === "POST") {
     $username = $_POST["username"];
     $email = $_POST["email"];
     $rawPassword = $_POST["password"];
+    $confirmedPassword = $_POST["confirm_password"];
     $password = password_hash($rawPassword, PASSWORD_DEFAULT);
     $role = $_POST["role"];
     $specialty = $_POST["specialty"];
 
-    $userHandler = new UserController($database);
-    $doctorHandler = new DoctorController($database);
-
-    $userExists = $userHandler->getUserData($username);
-    if ($userExists) {
-        echo "A felhasznalonev mar letezik, kerem valasszon masikat!";
-    } else if ($role == "doctor") {
-        $doctorHandler->createDoctor($firstName, $lastName, $username, $email, $password, $role, $specialty);
+    if (empty($firstName) || empty($lastName) || empty($username) || empty($email) || empty($rawPassword) || empty($role)) {
+        echo "All fields are required!";
+    } else if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        echo "Invalid email format!";
+    } else if ($rawPassword !== $confirmedPassword) {
+        echo "Passwords do not match!";
     } else {
-        $userHandler->createUser($firstName, $lastName, $username, $email, $password, $role);
+
+        $userHandler = new UserController($database);
+        $doctorHandler = new DoctorController($database);
+
+        $userExists = $userHandler->getUserData($username);
+        if ($userExists) {
+            echo "A felhasznalonev mar letezik, kerem valasszon masikat!";
+        } else if ($role == "doctor") {
+            $doctorHandler->createDoctor($firstName, $lastName, $username, $email, $password, $role, $specialty);
+        } else {
+            $userHandler->createUser($firstName, $lastName, $username, $email, $password, $role);
+        }
     }
 }
 
