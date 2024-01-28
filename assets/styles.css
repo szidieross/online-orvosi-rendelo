@@ -7,6 +7,7 @@
 }
 
 body {
+    margin: 0;
     background-image: url(./images/img.jpg);
     background-repeat: no-repeat;
     background-size: cover;
@@ -36,19 +37,27 @@ body::before {
     filter: blur(5px);
 }
 
-.main-container {
-    display: flex;
-    justify-content: center;
+.container {
+    margin: 40px;
+    background-color: rgba(255, 255, 255, 0.548);
+    padding: 40px;
+    border-radius: 5px;
 }
 
-.form {
-    display: flex;
-    flex-direction: column;
-    align-items: stretch;
+.button {
+    height: 40px;
+    width: max-content;
+    padding: 0 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    color: white;
+    text-decoration: none;
+    background-color: var(--primary);
+    line-height: 40px;
 }
-
-.form-group {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 10px;
-}
+/* 
+a {
+    text-decoration: none;
+    color: white;
+} */
