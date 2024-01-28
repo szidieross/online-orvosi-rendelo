@@ -55,6 +55,27 @@ class Appointment
         return null;
     }
 
+    public function getAppointmentByUserId($userId)
+    {
+        $conn = $this->db->getConnection();
+        $sql = "SELECT appointments.*, doctors.* FROM appointments INNER JOIN doctors ON appointments.doctor_id=doctors.doctor_id WHERE appointments.user_id=?";
+        $stmt = $conn->prepare($sql);
+        if ($stmt == false) {
+            echo "Hiba lekerdezes elokeszitesenel" . $conn->error;
+        }
+        $stmt->bind_param("i", $userId);
+        if (!$stmt->execute()) {
+            echo "Hiba lekerdezeskor" . $stmt->error;
+        }
+        $result = $stmt->get_result();
+        $stmt->close();
+        if ($result->num_rows > 0) {
+            $data = $result->fetch_all(MYSQLI_ASSOC);
+            return $data;
+        }
+        return null;
+    }
+
 
     public function book($userId, $id)
     {

@@ -24,7 +24,8 @@ $doctorData = $doctorHandler->getAllDoctors();
 </head>
 
 <body>
-    <td><a href="./logout.php"><button>Logout</button></a></td>
+    <a href="./logout.php"><button>Logout</button></a>
+    <a href="index.php"><button>Home</button></a>
 
     <div class="booking">
         <h2>Personal Data</h2>

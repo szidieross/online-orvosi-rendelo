@@ -39,6 +39,8 @@ if ($_SERVER['REQUEST_METHOD'] == "POST" && isset($_POST["book"])) {
 </head>
 
 <body>
+    <a href="./logout.php"><button>Logout</button></a>
+    <a href="index.php"><button>Home</button></a>
     <h2>
         <?php echo $doctor["first_name"] . " " . $doctor["last_name"]; ?>'s Available Appointments
     </h2>
