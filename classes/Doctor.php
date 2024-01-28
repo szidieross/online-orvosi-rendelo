@@ -9,21 +9,6 @@ class Doctor
         $this->db = $db;
     }
 
-    // public function create($userId, $firstName, $lastName, $specialty)
-    // {
-    //     $conn = $this->db->getConnection();
-
-    //     $stmt = $conn->prepare("INSERT INTO doctors (user_id, first_name, last_name, specialty) VALUES (?, ?, ?, ?)");
-    //     $stmt->bind_param("isss", $userId, $firstName, $lastName, $specialty);
-
-    //     if ($stmt->execute()) {
-    //         return $stmt->insert_id;
-    //     } else {
-    //         echo "Error: " . $stmt->error;
-    //         return false;
-    //     }
-    // }
-
     public function create($userId, $firstName, $lastName, $specialty)
     {
         $conn = $this->db->getConnection();
@@ -31,14 +16,14 @@ class Doctor
         $stmt = $conn->prepare("INSERT INTO doctors (user_id, first_name, last_name, specialty) VALUES (?, ?, ?, ?)");
         $stmt->execute([$userId, $firstName, $lastName, $specialty]);
 
-        if ($stmt->execute()) {
+        if ($stmt->insert_id) {
             $doctorId = $stmt->insert_id;
 
-            $appointmentTimes = ['08:00:00', '09:00:00', '10:00:00', '11:00:00', '12:00:00', '13:00:00', '14:00:00', '15:00:00'];
+            $appointmentTimes = ['08:00:00', '09:00:00', '10:00:00', '11:00:00', '12:00:00'];
 
             $startFromTomorrow = strtotime('tomorrow');
 
-            for ($i = 0; $i < 10; $i++) {
+            for ($i = 0; $i < 5; $i++) {
                 foreach ($appointmentTimes as $time) {
                     $appointmentDateTime = date("Y-m-d {$time}", strtotime("+{$i} days", $startFromTomorrow));
 
@@ -47,7 +32,7 @@ class Doctor
                 }
             }
 
-            return $stmt->insert_id;
+            return $doctorId;
         } else {
             echo "Error: " . $stmt->error;
             return false;
@@ -72,7 +57,6 @@ class Doctor
 
     public function doctorLogin($username, $password)
     {
-        echo "hello";
         $conn = $this->db->getConnection();
         $sql = "SELECT username, password FROM users
                 INNER JOIN doctors ON doctors.user_id = users.user_id

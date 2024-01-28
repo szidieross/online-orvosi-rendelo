@@ -56,22 +56,5 @@ class User
         }
     }
 
-    // public function getUserData($username)
-    // {
-    //     $conn = $this->db->getConnection();
-    //     $stmt = $conn->prepare("SELECT * FROM users WHERE username = ?");
-    //     $stmt->bind_param("s", $username);
-    //     $stmt->execute();
-
-    //     $result = $stmt->get_result();
-
-    //     if ($result->num_rows > 0) {
-    //         $user = $result->fetch_assoc();
-    //         return $user;
-    //     } else {
-    //         return null; // Vagy más jel, hogy a felhasználó nem található
-    //     }
-    // }
-
 }
 ?>
