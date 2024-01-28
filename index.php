@@ -8,6 +8,7 @@ include_once("./controllers/UserController.php");
 include_once("./controllers/DoctorController.php");
 include_once("./controllers/AppointmentController.php");
 include_once("./classes/Database.php");
+
 $database = Database::getInstance();
 
 $currentUsername = $_SESSION["username"];

@@ -12,11 +12,13 @@ class Database
 
     private function __construct()
     {
+        $this->initializeDatabase();
     }
 
-    public static function getInstance(){
-        if(!self::$instance){
-            self::$instance=new self();
+    public static function getInstance()
+    {
+        if (!self::$instance) {
+            self::$instance = new self();
             self::$instance->initializeDatabase();
         }
         return self::$instance;
