@@ -51,6 +51,7 @@ class UserController
 
     public function updateUserData($firstName, $lastName, $username, $email, $userId)
     {
+        echo "INNNN HEREEEEEEEE";
         $conn = $this->db->getConnection();
 
         $sql = "UPDATE users SET first_name=?, last_name=?, username=?, email=? WHERE user_id=?";
@@ -63,7 +64,7 @@ class UserController
         }
 
         $stmt->close();
-
+        
         header("Location: index.php");
     }
 }

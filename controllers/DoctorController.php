@@ -34,4 +34,23 @@ class DoctorController
         $doctor = new Doctor($this->pdo);
         $doctor->doctorLogin($username, $password);
     }
+
+    public function updateDoctorData($firstName, $lastName, $userId)
+    {
+        echo "OUTTTTT HEREEEEEEEE";
+        $conn = $this->pdo->getConnection();
+
+        $sql = "UPDATE doctors SET first_name=?, last_name=? WHERE user_id=?";
+        $stmt = $conn->prepare($sql);
+
+        $stmt->bind_param("ssi", $firstName, $lastName, $userId);
+
+        if (!$stmt->execute()) {
+            die("Hiba az adat frissítése során: " . $stmt->error);
+        }
+
+        $stmt->close();
+
+        header("Location: index.php");
+    }
 }
