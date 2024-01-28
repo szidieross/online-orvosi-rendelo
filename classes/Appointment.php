@@ -70,4 +70,25 @@ class Appointment
         }
         $stmt->close();
     }
+
+    public function isAppointmentBooked($id)
+    {
+        $conn = $this->db->getConnection();
+        $sql = "SELECT user_id FROM appointments WHERE appointment_id=?";
+        $stmt = $conn->prepare($sql);
+        if ($stmt == false) {
+            echo "Hiba lekerdezes elokeszitesenel" . $conn->error;
+        }
+        $stmt->bind_param("i", $id);
+        if (!$stmt->execute()) {
+            echo "Hiba lekerdezeskor" . $stmt->error;
+        }
+        $result = $stmt->get_result();
+        $stmt->close();
+        if ($result->num_rows > 0) {
+            $isBooked = $result->fetch_assoc();
+            return $isBooked;
+        }
+        return null;
+    }
 }

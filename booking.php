@@ -22,8 +22,8 @@ $availableAppointments = $appointmentHandler->getAppointmentByDoctorId($id);
 
 if ($_SERVER['REQUEST_METHOD'] == "POST" && isset($_POST["book"])) {
     $id = $_POST["appointmentId"];
-    
-    $appointmentHandler->book($userId,$id);
+
+    $appointmentHandler->book($userId, $id);
 }
 
 ?>
@@ -54,8 +54,8 @@ if ($_SERVER['REQUEST_METHOD'] == "POST" && isset($_POST["book"])) {
             <?php foreach ($availableAppointments as $appointment):
                 $appointmentDateTime = $appointment['appointment_time'];
                 $date = date("Y-m-d", strtotime($appointmentDateTime));
-                $time = date("H:i:s", strtotime($appointmentDateTime)); ?>
-
+                $time = date("H:i:s", strtotime($appointmentDateTime));
+                ?>
                 <tr>
                     <td>
                         <?php echo $date; ?>
@@ -65,7 +65,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST" && isset($_POST["book"])) {
                     </td>
                     <td>
                         <form method="post" action="">
-                        <input type="hidden" name="appointmentId" value="<?php echo $appointment['appointment_id']; ?>">
+                            <input type="hidden" name="appointmentId" value="<?php echo $appointment['appointment_id']; ?>">
                             <input type="submit" name="book" value="Book Appointment">
                         </form>
                     </td>

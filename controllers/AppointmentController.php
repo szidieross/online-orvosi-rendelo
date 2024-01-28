@@ -37,5 +37,12 @@ class AppointmentController
         $appointment = new Appointment($this->pdo);
         $appointment->book($userId, $id);
     }
+
+    public function isAppointmentBooked($id)
+    {
+        $appointment = new Appointment($this->pdo);
+        $isBooked = $appointment->isAppointmentBooked($id);
+        return $isBooked;
+    }
 }
 ?>
