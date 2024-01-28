@@ -11,7 +11,6 @@ $database = Database::getInstance();
 $userHandler = new userController($database);
 
 $username = $_SESSION["username"];
-echo $username;
 $user = $userHandler->getUserData($username);
 $userId = $user["user_id"];
 
@@ -22,7 +21,6 @@ $availableAppointments = $appointmentHandler->getAppointmentByDoctorId($id);
 
 if ($_SERVER['REQUEST_METHOD'] == "POST" && isset($_POST["book"])) {
     $appointmentId = $_POST["appointmentId"];
-
     $appointmentHandler->book($userId, $appointmentId);
     $availableAppointments = $appointmentHandler->getAppointmentByDoctorId($id);
 }

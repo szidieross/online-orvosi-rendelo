@@ -15,7 +15,6 @@ class UserController
         $user = new User($this->db);
         $userId = $user->create($firstName, $lastName, $username, $email, $password, $role);
 
-        echo "A felhasználó sikeresen létrehozva!: " . $userId;
         return $userId;
     }
 
@@ -51,7 +50,6 @@ class UserController
 
     public function updateUserData($firstName, $lastName, $username, $email, $userId)
     {
-        echo "INNNN HEREEEEEEEE";
         $conn = $this->db->getConnection();
 
         $sql = "UPDATE users SET first_name=?, last_name=?, username=?, email=? WHERE user_id=?";

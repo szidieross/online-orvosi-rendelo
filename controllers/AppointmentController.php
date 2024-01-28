@@ -32,6 +32,13 @@ class AppointmentController
         return $selectedAppointments;
     }
 
+    public function getBookedAppointmentByDoctorId($doctorId)
+    {
+        $appointment = new Appointment($this->pdo);
+        $selectedAppointments = $appointment->getBookedAppointmentByDoctorId($doctorId);
+        return $selectedAppointments;
+    }
+
     public function getAppointmentByUserId($userId)
     {
         $appointment = new Appointment($this->pdo);

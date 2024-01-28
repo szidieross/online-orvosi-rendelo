@@ -16,8 +16,6 @@ class DoctorController
         $userId = $userHandler->createUser($firstName, $lastName, $username, $email, $password, $role);
         $doctor = new Doctor($this->pdo);
         $doctor->create($userId, $firstName, $lastName, $specialty);
-
-        echo "Az orvos sikeresen létrehozva!";
     }
 
     public function getAllDoctors()

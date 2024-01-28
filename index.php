@@ -24,7 +24,7 @@ if (isset($_SESSION["doctor"])) {
     $doctorHandler = new DoctorController($database);
     $doctorData = $doctorHandler->getDoctorByUserId($userData["user_id"]);
 
-    $appointmentsDoctors = $appointmentHandler->getAppointmentByDoctorId($doctorData["doctor_id"]);
+    $appointmentsDoctors = $appointmentHandler->getBookedAppointmentByDoctorId($doctorData["doctor_id"]);
 }
 
 $userBoking = <<<EOD

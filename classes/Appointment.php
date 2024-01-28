@@ -38,6 +38,26 @@ class Appointment
     public function getAppointmentByDoctorId($doctorId)
     {
         $conn = $this->db->getConnection();
+        $sql = "SELECT * FROM appointments WHERE doctor_id=? AND user_id IS NULL";
+        $stmt = $conn->prepare($sql);
+        if ($stmt == false) {
+            echo "Hiba lekerdezes elokeszitesenel" . $conn->error;
+        }
+        $stmt->bind_param("i", $doctorId);
+        if (!$stmt->execute()) {
+            echo "Hiba lekerdezeskor" . $stmt->error;
+        }
+        $result = $stmt->get_result();
+        if ($result->num_rows > 0) {
+            $selectedAppointments = $result->fetch_all(MYSQLI_ASSOC);
+            return $selectedAppointments;
+        }
+        return null;
+    }
+
+    public function getBookedAppointmentByDoctorId($doctorId)
+    {
+        $conn = $this->db->getConnection();
         $sql = "SELECT appointments.*, users.* FROM appointments INNER JOIN users ON users.user_id=appointments.user_id WHERE doctor_id=?";
         $stmt = $conn->prepare($sql);
         if ($stmt == false) {
