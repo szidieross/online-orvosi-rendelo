@@ -10,8 +10,6 @@ $doctorHandler = new DoctorController($database);
 
 $id = isset($_GET['id']) ? $_GET['id'] : 0;
 
-echo "ID: " . $id;
-
 $sql = "SELECT * FROM users WHERE user_id=?";
 $stmt = $database->prepare($sql);
 
@@ -37,13 +35,19 @@ if (isset($_POST['update']) && $_SERVER["REQUEST_METHOD"] == "POST") {
     $lastName = $_POST["last_name"];
     $username = $_POST["username"];
     $email = $_POST["email"];
+    $userExists = $userHandler->getUserData($username);
 
-    if (isset($_SESSION['doctor'])) {
+    if (empty($firstName) || empty($lastName) || empty($username) || empty($email)) {
+        echo "All fields are required!";
+    } else if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        echo "Invalid email format!";
+    } elseif ($userExists) {
+        echo "This username is already taken, please choose another one.";
+    } else if (isset($_SESSION['doctor'])) {
         $doctorHandler->updateDoctorData($firstName, $lastName, $id);
         $userHandler->updateUserData($firstName, $lastName, $username, $email, $id);
     } else {
         $userHandler->updateUserData($firstName, $lastName, $username, $email, $id);
-
     }
 }
 ?>

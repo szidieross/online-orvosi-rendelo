@@ -45,14 +45,13 @@ class User
             $row = $result->fetch_assoc();
 
             if (password_verify($password, $row['password'])) {
-                echo "Sikeres bejelentkezes";
                 $_SESSION["username"] = $username;
                 header("Location: index.php");
             } else {
-                echo "Hibas jelszo";
+                echo "Wrong password";
             }
         } else {
-            echo "Felhasznalonev nem talalhato.";
+            echo "This username doesn't exist.";
         }
     }
 
