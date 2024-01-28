@@ -75,4 +75,27 @@ class DoctorController
         }
         return null;
     }
+
+    public function getDoctorByUserId($userId)
+    {
+        $conn = $this->pdo->getConnection();
+
+        $sql = "SELECT * FROM doctors WHERE user_id=?";
+        $stmt = $conn->prepare($sql);
+
+        $stmt->bind_param("i", $userId);
+
+        if (!$stmt->execute()) {
+            die("Hiba az adat frissítése során: " . $stmt->error);
+        }
+
+        $result = $stmt->get_result();
+        $stmt->close();
+      
+        if($result->num_rows>0){
+            $doctor=$result->fetch_assoc();
+            return $doctor;
+        }
+        return null;
+    }
 }

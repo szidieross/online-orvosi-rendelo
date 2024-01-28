@@ -5,6 +5,7 @@ if (!isset($_SESSION["username"])) {
 }
 
 include_once("./controllers/UserController.php");
+include_once("./controllers/DoctorController.php");
 include_once("./controllers/AppointmentController.php");
 include_once("./classes/Database.php");
 $database = Database::getInstance();
@@ -13,9 +14,15 @@ $currentUsername = $_SESSION["username"];
 $userHandler = new UserController($database);
 $userData = $userHandler->getUserData($currentUsername);
 
-
 $appointmentHandler = new AppointmentController($database);
 $appointments = $appointmentHandler->getAppointmentByUserId($userData["user_id"]);
+
+if (isset($_SESSION["doctor"])) {
+    $doctorHandler = new DoctorController($database);
+    $doctorData = $doctorHandler->getDoctorByUserId($userData["user_id"]);
+
+    $appointmentsDoctors = $appointmentHandler->getAppointmentByDoctorId($doctorData["doctor_id"]);
+}
 
 $userBoking = <<<EOD
 <div class="booking">
@@ -82,62 +89,113 @@ EOD;
             </table>
         </div>
 
-        <?php if (isset($_SESSION["doctor"])) {
-            echo $doctorBoking;
-        } else {
+        <?php if (!isset($_SESSION["doctor"])) {
             echo $userBoking;
         }
         ?>
-        <div class="booking">
-            <h2>Appointments</h2>
 
-            <table class="appointments">
-                <thead>
-                    <tr>
-                        <th colspan=2>Doctor</th>
-                        <th>Specialty</th>
-                        <th>Date</th>
-                        <th>Time</th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php
-                    if ($appointments): ?>
-                        <?php foreach ($appointments as $data):
-                            $dateTime = $data['appointment_time'];
-                            $date = date("Y-m-d", strtotime($dateTime));
-                            $time = date("H-m-s", strtotime($dateTime));
-                            ?>
-                            <tr>
-                                <td>
-                                    <?php echo $data["first_name"]; ?>
-                                </td>
-                                <td>
-                                    <?php echo $data["last_name"]; ?>
-                                </td>
-                                <td>
-                                    <?php echo $data["specialty"]; ?>
-                                </td>
-                                <td>
-                                    <?php echo $date; ?>
-                                </td>
-                                <td>
-                                    <?php echo $time; ?>
-                                </td>
-                                <td></a>
-                                    <?php ?>
-                                </td>
-                            </tr>
-                        <?php endforeach ?>
-                    <?php else: ?>
+        <?php if (!isset($_SESSION["doctor"])): ?>
+
+            <div class="booking">
+                <h2>Appointments</h2>
+
+                <table class="appointments">
+                    <thead>
                         <tr>
-                            <td colspan="5">There are no bookings yet.</td>
+                            <th>Doctor</th>
+                            <th>Specialty</th>
+                            <th>Date</th>
+                            <th>Time</th>
+                            <th></th>
                         </tr>
-                    <?php endif; ?>
-                </tbody>
-            </table>
-        </div>
+                    </thead>
+                    <tbody>
+                        <?php
+                        if ($appointments): ?>
+                            <?php foreach ($appointments as $data):
+                                $dateTime = $data['appointment_time'];
+                                $date = date("Y-m-d", strtotime($dateTime));
+                                $time = date("H-m-s", strtotime($dateTime));
+                                ?>
+                                <tr>
+                                    <td>
+                                        <?php
+                                        echo $data["first_name"];
+                                        echo $data["last_name"];
+                                        ?>
+                                    </td>
+                                    <td>
+                                        <?php echo $data["specialty"]; ?>
+                                    </td>
+                                    <td>
+                                        <?php echo $date; ?>
+                                    </td>
+                                    <td>
+                                        <?php echo $time; ?>
+                                    </td>
+                                    <td></a>
+                                        <?php ?>
+                                    </td>
+                                </tr>
+                            <?php endforeach ?>
+                        <?php else: ?>
+                            <tr>
+                                <td colspan="4">There are no bookings yet.</td>
+                            </tr>
+                        <?php endif; ?>
+                    </tbody>
+                </table>
+            </div>
+
+        <?php else: ?>
+
+            <div class="booking">
+                <h2>Appointments</h2>
+
+                <table class="appointments">
+                    <thead>
+                        <tr>
+                            <th>Patient</th>
+                            <th>Date</th>
+                            <th>Time</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+                        if ($appointmentsDoctors): ?>
+                            <?php foreach ($appointmentsDoctors as $data):
+                                $dateTime = $data['appointment_time'];
+                                $date = date("Y-m-d", strtotime($dateTime));
+                                $time = date("H-m-s", strtotime($dateTime));
+                                ?>
+                                <tr>
+                                    <td>
+                                        <?php
+                                        echo $data["first_name"];
+                                        echo $data["last_name"];
+                                        ?>
+                                    </td>
+                                    <td>
+                                        <?php echo $date; ?>
+                                    </td>
+                                    <td>
+                                        <?php echo $time; ?>
+                                    </td>
+                                    <td></a>
+                                        <?php ?>
+                                    </td>
+                                </tr>
+                            <?php endforeach ?>
+                        <?php else: ?>
+                            <tr>
+                                <td colspan="5">There are no bookings yet.</td>
+                            </tr>
+                        <?php endif; ?>
+                    </tbody>
+                </table>
+            </div>
+        <?php endif ?>
     </main>
 </body>
 

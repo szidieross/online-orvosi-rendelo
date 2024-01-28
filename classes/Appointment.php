@@ -38,7 +38,7 @@ class Appointment
     public function getAppointmentByDoctorId($doctorId)
     {
         $conn = $this->db->getConnection();
-        $sql = "SELECT * FROM appointments WHERE doctor_id=? AND user_id IS null";
+        $sql = "SELECT appointments.*, users.* FROM appointments INNER JOIN users ON users.user_id=appointments.user_id WHERE doctor_id=?";
         $stmt = $conn->prepare($sql);
         if ($stmt == false) {
             echo "Hiba lekerdezes elokeszitesenel" . $conn->error;
