@@ -54,4 +54,20 @@ class Appointment
         }
         return null;
     }
+
+
+    public function book($user_id, $id)
+    {
+        $conn = $this->db->getConnection();
+        $sql = "UPDATE appointments SET user_id=? WHERE appointment_id=?";
+        $stmt = $conn->prepare($sql);
+        if ($stmt == false) {
+            echo "Hiba lekerdezes elokeszitesenel" . $conn->error;
+        }
+        $stmt->bind_param("ii", $user_id, $id);
+        if (!$stmt->execute()) {
+            echo "Hiba lekerdezeskor" . $stmt->error;
+        }
+        $stmt->close();
+    }
 }

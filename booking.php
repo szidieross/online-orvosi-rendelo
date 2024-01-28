@@ -3,14 +3,28 @@ session_start();
 include_once("classes/Database.php");
 include_once("controllers/DoctorController.php");
 include_once("controllers/AppointmentController.php");
+include_once("controllers/userController.php");
 
 $id = isset($_GET['id']) ? $_GET["id"] : 0;
 
 $database = Database::getInstance();
+$userHandler = new userController($database);
+
+$username = $_SESSION["username"];
+echo $username;
+$user = $userHandler->getUserData($username);
+$userId = $user["user_id"];
+
 $doctorHandler = new DoctorController($database);
 $doctor = $doctorHandler->getDoctorById($id);
 $appointmentHandler = new AppointmentController($database);
 $availableAppointments = $appointmentHandler->getAppointmentByDoctorId($id);
+
+if ($_SERVER['REQUEST_METHOD'] == "POST" && isset($_POST["book"])) {
+    $id=$_POST["appointment_id"];
+    
+    $appointmentHandler->book($userId,$id);
+}
 
 ?>
 
@@ -53,7 +67,7 @@ $availableAppointments = $appointmentHandler->getAppointmentByDoctorId($id);
                         <form method="post" action="">
                             <input type="hidden" name="appointment_id"
                                 value="<?php echo $appointment['appointment_id']; ?>">
-                            <input type="submit" name="bookAppointment" value="Book Appointment">
+                            <input type="submit" name="book" value="Book Appointment">
                         </form>
                     </td>
                 </tr>
