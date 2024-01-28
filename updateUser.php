@@ -17,10 +17,6 @@ $stmt = $database->prepare($sql);
 
 $stmt->bind_param("i", $id);
 
-if (!$stmt->execute()) {
-    die("Hiba a SELECT lekérdezés során: " . $database->error);
-}
-
 $result = $stmt->get_result();
 
 if ($result->num_rows > 0) {
