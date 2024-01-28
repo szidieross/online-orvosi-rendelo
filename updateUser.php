@@ -68,7 +68,7 @@ if (isset($_POST['update']) && $_SERVER["REQUEST_METHOD"] == "POST") {
         Last Name: <input type="text" name="last_name" value="<?php echo $lastName; ?>" required><br><br>
         Username: <input type="text" name="username" value="<?php echo $username; ?>" required><br><br>
         Email: <input type="email" name="email" value="<?php echo $email; ?>" required><br><br>
-        <input type="submit" name="update" value="Ment">
+        <input type="submit" name="update" class="button" value="Ment">
     </form>
 </body>
 

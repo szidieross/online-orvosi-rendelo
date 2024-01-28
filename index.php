@@ -30,14 +30,7 @@ if (isset($_SESSION["doctor"])) {
 $userBoking = <<<EOD
 <div class="booking">
     <h2>Want an Appointment?</h2>
-    <button class="btn"><a href="./doctors.php" class="btn">Book Appointment</a></p></button>
-</div>
-EOD;
-
-$doctorBoking = <<<EOD
-<div class="booking">
-    <h2>Setting Appointments</h2>
-    <button class="btn"><a href="./add-appointment.php" class="btn">Set Appointments</a></p></button>
+    <a href="./doctors.php"><button class="button">Book Appointment</button></a>
 </div>
 EOD;
 
@@ -56,7 +49,7 @@ EOD;
 
 <body>
     <main>
-        <td><a href="./logout.php"><button>Logout</button></a></td>
+        <td><a href="./logout.php"><button class="button">Logout</button></a></td>
 
         <div class="booking">
             <h2>Personal Data</h2>
@@ -86,7 +79,7 @@ EOD;
                         <td>
                             <?php echo $userData["email"]; ?>
                         </td>
-                        <td><a href="./updateUser.php?id=<?php echo $userData["user_id"]; ?>">Szerkesztés</a></td>
+                        <td><a href="./updateUser.php?id=<?php echo $userData["user_id"]; ?>"><button class="button">Edit</button></a></td>
                     </tr>
                 </tbody>
             </table>
@@ -140,7 +133,7 @@ EOD;
                                         <form method="post" action="">
                                             <input type="hidden" name="appointment_id"
                                                 value="<?php echo $data['appointment_id']; ?>">
-                                            <button type="submit" name="remove">Delete</button>
+                                            <button type="submit" class="button" name="remove">Delete</button>
                                         </form>
                                     </td>
                                 </tr>
@@ -193,7 +186,7 @@ EOD;
                                         <form method="post" action="">
                                             <input type="hidden" name="appointment_id"
                                                 value="<?php echo $data['appointment_id']; ?>">
-                                            <button type="submit" name="delete">Delete</button>
+                                            <button type="submit" name="delete" class="button">Delete</button>
                                         </form>
                                     </td>
                                 </tr>

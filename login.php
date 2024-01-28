@@ -37,8 +37,8 @@ if (isset($_POST["doctor_login"]) && $_SERVER['REQUEST_METHOD'] === "POST") {
 
 <body>
     <div class="toggle-container">
-        <button onclick="toggleForm('user')">Login as User</button>
-        <button onclick="toggleForm('doctor')">Login as Doctor</button>
+        <button class="button" onclick="toggleForm('user')">Login as User</button>
+        <button class="button" onclick="toggleForm('doctor')">Login as Doctor</button>
     </div>
 
     <div class="main-container">
@@ -54,10 +54,10 @@ if (isset($_POST["doctor_login"]) && $_SERVER['REQUEST_METHOD'] === "POST") {
                     <input type="password" name="password" class="form-control">
                 </div>
                 <div class="form-group">
-                    <input type="submit" name="login" class="btn" value="Login">
+                    <input type="submit" name="login" class="button" value="Login">
                 </div>
             </form>
-            <p>Don't have an account? <a href="signup.php"> <button class="btn">Sign up</button></a></p>
+            <p>Don't have an account? <a href="signup.php"> <button class="button">Sign up</button></a></p>
         </div>
 
         <div class="form" id="doctor-form" style="display:none;">
@@ -72,7 +72,7 @@ if (isset($_POST["doctor_login"]) && $_SERVER['REQUEST_METHOD'] === "POST") {
                     <input type="password" name="password" class="form-control">
                 </div>
                 <div class="form-group">
-                    <input type="submit" name="doctor_login" class="btn" value="Login">
+                    <input type="submit" name="doctor_login" class="button" value="Login">
                 </div>
             </form>
         </div>

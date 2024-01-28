@@ -47,7 +47,7 @@ if (isset($_POST["sign_up"]) && $_SERVER['REQUEST_METHOD'] === "POST") {
 <body>
     <p>Van fiokod?</p>
     <a href="login.php">
-        <button>Jelentkezz be</button></a>
+        <button class="button">Jelentkezz be</button></a>
     <h2>Regisztralj</h2>
 
     <form method="POST" action="">
@@ -64,9 +64,9 @@ if (isset($_POST["sign_up"]) && $_SERVER['REQUEST_METHOD'] === "POST") {
         </select><br><br>
         <p>if you're a doctor:</p><br />
         Specialty: <input type="text" name="specialty" id=""><br><br>
-        <input type="submit" name="sign_up" value="Sign Up">
+        <input type="submit" name="sign_up" class="button" value="Sign Up">
     </form>
-    <p>Already have an account? <a href="login.php"> <button class="btn">Sign in</button></a></p>
+    <p>Already have an account? <a href="login.php"> <button class="button">Sign in</button></a></p>
 </body>
 
 </html>

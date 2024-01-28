@@ -24,8 +24,8 @@ $doctorData = $doctorHandler->getAllDoctors();
 </head>
 
 <body>
-    <a href="./logout.php"><button>Logout</button></a>
-    <a href="index.php"><button>Home</button></a>
+    <a href="./logout.php" class="button"><button>Logout</button></a>
+    <a href="index.php" class="button"><button>Home</button></a>
 
     <div class="booking">
         <h2>Personal Data</h2>
@@ -55,7 +55,7 @@ $doctorData = $doctorHandler->getAllDoctors();
                         <td>
                             <?php echo $doctor["email"]; ?>
                         </td>
-                        <td><a href="./booking.php?id=<?php echo $doctor["doctor_id"]; ?>">Foglalj idopontot</a></td>
+                        <td><a href="./booking.php?id=<?php echo $doctor["doctor_id"]; ?>"><button class="button">Foglalj idopontot</button></a></td>
                     </tr>
                 <?php endforeach ?>
             </tbody>
