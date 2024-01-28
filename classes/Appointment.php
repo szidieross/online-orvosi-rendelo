@@ -38,7 +38,7 @@ class Appointment
     public function getAppointmentByDoctorId($doctorId)
     {
         $conn = $this->db->getConnection();
-        $sql = "SELECT * FROM appointments WHERE doctor_id=?";
+        $sql = "SELECT * FROM appointments WHERE doctor_id=? AND user_id IS null";
         $stmt = $conn->prepare($sql);
         if ($stmt == false) {
             echo "Hiba lekerdezes elokeszitesenel" . $conn->error;
@@ -56,7 +56,7 @@ class Appointment
     }
 
 
-    public function book($user_id, $id)
+    public function book($userId, $id)
     {
         $conn = $this->db->getConnection();
         $sql = "UPDATE appointments SET user_id=? WHERE appointment_id=?";
@@ -64,7 +64,7 @@ class Appointment
         if ($stmt == false) {
             echo "Hiba lekerdezes elokeszitesenel" . $conn->error;
         }
-        $stmt->bind_param("ii", $user_id, $id);
+        $stmt->bind_param("ii", $userId, $id);
         if (!$stmt->execute()) {
             echo "Hiba lekerdezeskor" . $stmt->error;
         }

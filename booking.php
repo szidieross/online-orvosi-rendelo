@@ -21,7 +21,7 @@ $appointmentHandler = new AppointmentController($database);
 $availableAppointments = $appointmentHandler->getAppointmentByDoctorId($id);
 
 if ($_SERVER['REQUEST_METHOD'] == "POST" && isset($_POST["book"])) {
-    $id=$_POST["appointment_id"];
+    $id = $_POST["appointmentId"];
     
     $appointmentHandler->book($userId,$id);
 }
@@ -65,8 +65,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST" && isset($_POST["book"])) {
                     </td>
                     <td>
                         <form method="post" action="">
-                            <input type="hidden" name="appointment_id"
-                                value="<?php echo $appointment['appointment_id']; ?>">
+                        <input type="hidden" name="appointmentId" value="<?php echo $appointment['appointment_id']; ?>">
                             <input type="submit" name="book" value="Book Appointment">
                         </form>
                     </td>
