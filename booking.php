@@ -38,44 +38,49 @@ if ($_SERVER['REQUEST_METHOD'] == "POST" && isset($_POST["book"])) {
 </head>
 
 <body>
-    <a href="./logout.php"><button class="button">Logout</button></a>
-    <a href="index.php"><button class="button">Home</button></a>
-    <h2>
-        <?php echo $doctor["first_name"] . " " . $doctor["last_name"]; ?>'s Available Appointments
-    </h2>
+    <div class="container">
+        <div>
+            <a href="./logout.php"><button class="button">Logout</button></a>
+            <a href="index.php"><button class="button">Home</button></a>
+        </div>
+        <h2>
+            <?php echo $doctor["first_name"] . " " . $doctor["last_name"]; ?>'s Available Appointments
+        </h2>
 
-    <table>
-        <thead>
-            <tr>
-                <th>Day</th>
-                <th>Appointment Time</th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php foreach ($availableAppointments as $appointment):
-                $appointmentDateTime = $appointment['appointment_time'];
-                $date = date("Y-m-d", strtotime($appointmentDateTime));
-                $time = date("H:i:s", strtotime($appointmentDateTime));
-                ?>
+        <table>
+            <thead>
                 <tr>
-                    <td>
-                        <?php echo $date; ?>
-                    </td>
-                    <td>
-                        <?php echo $time; ?>
-                    </td>
-                    <td>
-                        <form method="post" action="">
-                            <input type="hidden" name="appointmentId" value="<?php echo $appointment['appointment_id']; ?>">
-                            <input type="submit" name="book" class="button" value="Book Appointment">
-                        </form>
-                    </td>
+                    <th>Day</th>
+                    <th>Appointment Time</th>
+                    <th></th>
                 </tr>
+            </thead>
+            <tbody>
+                <?php foreach ($availableAppointments as $appointment):
+                    $appointmentDateTime = $appointment['appointment_time'];
+                    $date = date("Y-m-d", strtotime($appointmentDateTime));
+                    $time = date("H:i:s", strtotime($appointmentDateTime));
+                    ?>
+                    <tr>
+                        <td>
+                            <?php echo $date; ?>
+                        </td>
+                        <td>
+                            <?php echo $time; ?>
+                        </td>
+                        <td>
+                            <form method="post" action="">
+                                <input type="hidden" name="appointmentId"
+                                    value="<?php echo $appointment['appointment_id']; ?>">
+                                <input type="submit" name="book" class="button" value="Book Appointment">
+                            </form>
+                        </td>
+                    </tr>
 
-            <?php endforeach; ?>
-        </tbody>
-    </table>
+                <?php endforeach; ?>
+            </tbody>
+        </table>
+    </div>
 </body>
 
 </html>

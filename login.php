@@ -36,45 +36,47 @@ if (isset($_POST["doctor_login"]) && $_SERVER['REQUEST_METHOD'] === "POST") {
 </head>
 
 <body>
-    <div class="toggle-container">
-        <button class="button" onclick="toggleForm('user')">Login as User</button>
-        <button class="button" onclick="toggleForm('doctor')">Login as Doctor</button>
-    </div>
-
-    <div class="main-container">
-        <div class="form" id="user-form">
-            <h2>Login as a User</h2>
-            <form action="" method="post">
-                <div class="form-group">
-                    <label>Username</label>
-                    <input type="text" name="username" class="form-control">
-                </div>
-                <div class="form-group">
-                    <label>Password</label>
-                    <input type="password" name="password" class="form-control">
-                </div>
-                <div class="form-group">
-                    <input type="submit" name="login" class="button" value="Login">
-                </div>
-            </form>
-            <p>Don't have an account? <a href="signup.php"> <button class="button">Sign up</button></a></p>
+    <div class="container">
+        <div class="toggle-container">
+            <button class="button" onclick="toggleForm('user')">Login as User</button>
+            <button class="button" onclick="toggleForm('doctor')">Login as Doctor</button>
         </div>
 
-        <div class="form" id="doctor-form" style="display:none;">
-            <h2>Login as a Doctor</h2>
-            <form action="" method="post">
-                <div class="form-group">
-                    <label>Username</label>
-                    <input type="text" name="username" class="form-control">
-                </div>
-                <div class="form-group">
-                    <label>Password</label>
-                    <input type="password" name="password" class="form-control">
-                </div>
-                <div class="form-group">
-                    <input type="submit" name="doctor_login" class="button" value="Login">
-                </div>
-            </form>
+        <div class="main-container">
+            <div class="form" id="user-form">
+                <h2>Login as a User</h2>
+                <form action="" method="post">
+                    <div class="form-group">
+                        <label>Username</label>
+                        <input type="text" name="username" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label>Password</label>
+                        <input type="password" name="password" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" name="login" class="button" value="Login">
+                    </div>
+                </form>
+                <p>Don't have an account? <a href="signup.php"> <button class="button">Sign up</button></a></p>
+            </div>
+
+            <div class="form" id="doctor-form" style="display:none;">
+                <h2>Login as a Doctor</h2>
+                <form action="" method="post">
+                    <div class="form-group">
+                        <label>Username</label>
+                        <input type="text" name="username" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label>Password</label>
+                        <input type="password" name="password" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" name="doctor_login" class="button" value="Login">
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
 

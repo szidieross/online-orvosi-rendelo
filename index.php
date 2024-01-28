@@ -48,9 +48,10 @@ EOD;
 </head>
 
 <body>
-    <main>
-        <td><a href="./logout.php"><button class="button">Logout</button></a></td>
-
+    <div class="container">
+        <div>
+            <td><a href="./logout.php"><button class="button">Logout</button></a></td>
+        </div>
         <div class="booking">
             <h2>Personal Data</h2>
             <table class="">
@@ -79,7 +80,8 @@ EOD;
                         <td>
                             <?php echo $userData["email"]; ?>
                         </td>
-                        <td><a href="./updateUser.php?id=<?php echo $userData["user_id"]; ?>"><button class="button">Edit</button></a></td>
+                        <td><a href="./updateUser.php?id=<?php echo $userData["user_id"]; ?>"><button
+                                    class="button">Edit</button></a></td>
                     </tr>
                 </tbody>
             </table>
@@ -200,7 +202,7 @@ EOD;
                 </table>
             </div>
         <?php endif ?>
-    </main>
+    </div>
 </body>
 
 </html>

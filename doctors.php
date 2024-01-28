@@ -24,42 +24,48 @@ $doctorData = $doctorHandler->getAllDoctors();
 </head>
 
 <body>
-    <a href="./logout.php"><button class="button">Logout</button></a>
-    <a href="index.php"><button class="button">Home</button></a>
+    <div class="container">
+        <div>
+            <a href="./logout.php"><button class="button">Logout</button></a>
+            <a href="index.php"><button class="button">Home</button></a>
+        </div>
 
-    <div class="booking">
-        <h2>Personal Data</h2>
-        <table class="">
-            <thead>
-                <tr>
-                    <th>First Name</th>
-                    <th>Last Name</th>
-                    <th>Username</th>
-                    <th>Email</th>
-                    <th>Booking</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php foreach ($doctorData as $doctor): ?>
-
+        <div class="booking">
+            <h2>Personal Data</h2>
+            <table class="">
+                <thead>
                     <tr>
-                        <td>
-                            <?php echo $doctor["first_name"]; ?>
-                        </td>
-                        <td>
-                            <?php echo $doctor["last_name"]; ?>
-                        </td>
-                        <td>
-                            <?php echo $doctor["username"]; ?>
-                        </td>
-                        <td>
-                            <?php echo $doctor["email"]; ?>
-                        </td>
-                        <td><a href="./booking.php?id=<?php echo $doctor["doctor_id"]; ?>"><button class="button">Foglalj idopontot</button></a></td>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Username</th>
+                        <th>Email</th>
+                        <th>Booking</th>
                     </tr>
-                <?php endforeach ?>
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                    <?php foreach ($doctorData as $doctor): ?>
+
+                        <tr>
+                            <td>
+                                <?php echo $doctor["first_name"]; ?>
+                            </td>
+                            <td>
+                                <?php echo $doctor["last_name"]; ?>
+                            </td>
+                            <td>
+                                <?php echo $doctor["username"]; ?>
+                            </td>
+                            <td>
+                                <?php echo $doctor["email"]; ?>
+                            </td>
+                            <td><a href="./booking.php?id=<?php echo $doctor["doctor_id"]; ?>"><button
+                                        class="button">Foglalj
+                                        idopontot</button></a></td>
+                        </tr>
+                    <?php endforeach ?>
+                </tbody>
+            </table>
+        </div>
     </div>
 </body>
 
