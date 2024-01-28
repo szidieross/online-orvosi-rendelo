@@ -45,96 +45,100 @@ EOD;
 </head>
 
 <body>
-    <td><a href="./logout.php"><button>Logout</button></a></td>
+    <main>
+        <td><a href="./logout.php"><button>Logout</button></a></td>
 
-    <div class="booking">
-        <h2>Personal Data</h2>
-        <table class="">
-            <thead>
-                <tr>
-                    <th>First Name</th>
-                    <th>Last Name</th>
-                    <th>Username</th>
-                    <th>Email</th>
-                    <th>Settings</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php
-                ?>
-                <tr>
-                    <td>
-                        <?php echo $userData["first_name"]; ?>
-                    </td>
-                    <td>
-                        <?php echo $userData["last_name"]; ?>
-                    </td>
-                    <td>
-                        <?php echo $userData["username"]; ?>
-                    </td>
-                    <td>
-                        <?php echo $userData["email"]; ?>
-                    </td>
-                    <td><a href="./updateUser.php?id=<?php echo $userData["user_id"]; ?>">Szerkesztés</a></td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-
-    <?php if (isset($_SESSION["doctor"])) {
-        echo $doctorBoking;
-    } else {
-        echo $userBoking;
-    }
-    ?>
-    <div class="booking">
-        <h2>Appointments</h2>
-
-        <table class="appointments">
-            <thead>
-                <tr>
-                    <th colspan=2>Doctor</th>
-                    <th>Specialty</th>
-                    <th>Date</th>
-                    <th>Time</th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php
-                if ($appointments): ?>
-                    <?php foreach ($appointments as $data):
-                        $dateTime = $data['appointment_time'];
-                        $date = date("Y-m-d", strtotime($dateTime));
-                        $time = date("H-m-s", strtotime($dateTime));
-                        ?>
-                        <tr>
-                            <td>
-                                <?php echo $data["first_name"]; ?>
-                            </td>
-                            <td>
-                                <?php echo $data["last_name"]; ?>
-                            </td>
-                            <td>
-                                <?php echo $data["specialty"]; ?>
-                            </td>
-                            <td>
-                                <?php echo $date; ?>
-                            </td>
-                            <td>
-                                <?php echo $time; ?>
-                            </td>
-                            <td></a><?php  ?></td>
-                        </tr>
-                    <?php endforeach ?>
-                <?php else: ?>
+        <div class="booking">
+            <h2>Personal Data</h2>
+            <table class="">
+                <thead>
                     <tr>
-                        <td colspan="5">There are no bookings yet.</td>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Username</th>
+                        <th>Email</th>
+                        <th>Settings</th>
                     </tr>
-                <?php endif; ?>
-            </tbody>
-        </table>
-    </div>
+                </thead>
+                <tbody>
+                    <?php
+                    ?>
+                    <tr>
+                        <td>
+                            <?php echo $userData["first_name"]; ?>
+                        </td>
+                        <td>
+                            <?php echo $userData["last_name"]; ?>
+                        </td>
+                        <td>
+                            <?php echo $userData["username"]; ?>
+                        </td>
+                        <td>
+                            <?php echo $userData["email"]; ?>
+                        </td>
+                        <td><a href="./updateUser.php?id=<?php echo $userData["user_id"]; ?>">Szerkesztés</a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <?php if (isset($_SESSION["doctor"])) {
+            echo $doctorBoking;
+        } else {
+            echo $userBoking;
+        }
+        ?>
+        <div class="booking">
+            <h2>Appointments</h2>
+
+            <table class="appointments">
+                <thead>
+                    <tr>
+                        <th colspan=2>Doctor</th>
+                        <th>Specialty</th>
+                        <th>Date</th>
+                        <th>Time</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php
+                    if ($appointments): ?>
+                        <?php foreach ($appointments as $data):
+                            $dateTime = $data['appointment_time'];
+                            $date = date("Y-m-d", strtotime($dateTime));
+                            $time = date("H-m-s", strtotime($dateTime));
+                            ?>
+                            <tr>
+                                <td>
+                                    <?php echo $data["first_name"]; ?>
+                                </td>
+                                <td>
+                                    <?php echo $data["last_name"]; ?>
+                                </td>
+                                <td>
+                                    <?php echo $data["specialty"]; ?>
+                                </td>
+                                <td>
+                                    <?php echo $date; ?>
+                                </td>
+                                <td>
+                                    <?php echo $time; ?>
+                                </td>
+                                <td></a>
+                                    <?php ?>
+                                </td>
+                            </tr>
+                        <?php endforeach ?>
+                    <?php else: ?>
+                        <tr>
+                            <td colspan="5">There are no bookings yet.</td>
+                        </tr>
+                    <?php endif; ?>
+                </tbody>
+            </table>
+        </div>
+    </main>
 </body>
 
 </html>

@@ -1,15 +1,54 @@
-.main-container{
-display: flex;
-justify-content: center;
+:root {
+    --primary: rgb(81, 146, 148);
+    --secondary: rgb(116, 124, 199);
+    --title: rgb(43, 92, 94);
+    --bgColor: rgba(255, 255, 255, 0.507);
+    --transparent: rgba(255, 255, 255, 0.87);
 }
 
-.form{
+body {
+    background-image: url(./images/img.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-attachment: fixed;
+    background-position: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+}
+
+body::before {
+    min-height: 100vh;
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: inherit;
+    z-index: -1;
+    filter: blur(5px);
+}
+
+.main-container {
+    display: flex;
+    justify-content: center;
+}
+
+.form {
     display: flex;
     flex-direction: column;
     align-items: stretch;
 }
 
-.form-group{
+.form-group {
     display: flex;
-    flex-direction: column;margin-bottom: 10px;
+    flex-direction: column;
+    margin-bottom: 10px;
 }
