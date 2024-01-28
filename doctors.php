@@ -10,8 +10,6 @@ $database = Database::getInstance();
 $currentUsername = $_SESSION["username"];
 $doctorHandler = new DoctorController($database);
 $doctorData = $doctorHandler->getAllDoctors();
-echo "<pre>";
-var_dump($doctorData);
 ?>
 
 <!DOCTYPE html>
@@ -59,26 +57,6 @@ var_dump($doctorData);
                         <td><a href="./booking.php?id=<?php echo $doctor["doctor_id"]; ?>">Foglalj idopontot</a></td>
                     </tr>
                 <?php endforeach ?>
-            </tbody>
-        </table>
-    </div>
-
-    <div class="booking">
-        <h2>Appointments</h2>
-
-        <table class="appointments">
-            <thead>
-                <tr>
-                    <th>Doctor</th>
-                    <th>pecialty</th>
-                    <th>Date</th>
-                    <th>Time</th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-
-
             </tbody>
         </table>
     </div>

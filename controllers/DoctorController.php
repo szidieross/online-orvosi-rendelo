@@ -37,7 +37,6 @@ class DoctorController
 
     public function updateDoctorData($firstName, $lastName, $userId)
     {
-        echo "OUTTTTT HEREEEEEEEE";
         $conn = $this->pdo->getConnection();
 
         $sql = "UPDATE doctors SET first_name=?, last_name=? WHERE user_id=?";
@@ -52,5 +51,29 @@ class DoctorController
         $stmt->close();
 
         header("Location: index.php");
+    }
+
+    public function getDoctorById($doctorId)
+    {
+        $conn = $this->pdo->getConnection();
+
+        $sql = "SELECT * FROM doctors WHERE doctor_id=?";
+        $stmt = $conn->prepare($sql);
+
+        $stmt->bind_param("i", $doctorId);
+
+        if (!$stmt->execute()) {
+            die("Hiba az adat frissítése során: " . $stmt->error);
+        }
+
+        $result = $stmt->get_result();
+        $stmt->close();
+      
+        if($result->num_rows>0){
+            $doctor=$result->fetch_assoc();
+            var_dump($doctor);
+            return $doctor;
+        }
+        return null;
     }
 }
