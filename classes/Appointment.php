@@ -112,4 +112,34 @@ class Appointment
         }
         return null;
     }
+
+    public function deleteAppointmentById($id)
+    {
+        $conn = $this->db->getConnection();
+        $sql = "DELETE FROM appointments WHERE appointment_id=?";
+        $stmt = $conn->prepare($sql);
+        if ($stmt == false) {
+            echo "Hiba lekerdezes elokeszitesenel" . $conn->error;
+        }
+        $stmt->bind_param("i", $id);
+        if (!$stmt->execute()) {
+            echo "Hiba lekerdezeskor" . $stmt->error;
+        }
+        $stmt->close();
+    }
+
+    public function removeAppointmentById($id)
+    {
+        $conn = $this->db->getConnection();
+        $sql = "UPDATE appointments SET user_id = NULL WHERE appointment_id=?";
+        $stmt = $conn->prepare($sql);
+        if ($stmt == false) {
+            echo "Hiba lekerdezes elokeszitesenel" . $conn->error;
+        }
+        $stmt->bind_param("i", $id);
+        if (!$stmt->execute()) {
+            echo "Hiba lekerdezeskor" . $stmt->error;
+        }
+        $stmt->close();
+    }
 }

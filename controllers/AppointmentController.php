@@ -51,5 +51,17 @@ class AppointmentController
         $isBooked = $appointment->isAppointmentBooked($id);
         return $isBooked;
     }
+
+    public function deleteAppointmentById($id)
+    {
+        $appointment = new Appointment($this->pdo);
+        $appointment->deleteAppointmentById($id);
+    }
+
+    public function removeAppointmentById($id)
+    {
+        $appointment = new Appointment($this->pdo);
+        $appointment->removeAppointmentById($id);
+    }
 }
 ?>

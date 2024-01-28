@@ -8,6 +8,8 @@ include_once("./controllers/UserController.php");
 include_once("./controllers/DoctorController.php");
 include_once("./controllers/AppointmentController.php");
 include_once("./classes/Database.php");
+include_once("./remove-booking.php");
+include_once("./delete-booking.php");
 
 $database = Database::getInstance();
 
@@ -134,8 +136,12 @@ EOD;
                                     <td>
                                         <?php echo $time; ?>
                                     </td>
-                                    <td></a>
-                                        <?php ?>
+                                    <td>
+                                        <form method="post" action="">
+                                            <input type="hidden" name="appointment_id"
+                                                value="<?php echo $data['appointment_id']; ?>">
+                                            <button type="submit" name="remove">Delete</button>
+                                        </form>
                                     </td>
                                 </tr>
                             <?php endforeach ?>
@@ -183,8 +189,12 @@ EOD;
                                     <td>
                                         <?php echo $time; ?>
                                     </td>
-                                    <td></a>
-                                        <?php ?>
+                                    <td>
+                                        <form method="post" action="">
+                                            <input type="hidden" name="appointment_id"
+                                                value="<?php echo $data['appointment_id']; ?>">
+                                            <button type="submit" name="delete">Delete</button>
+                                        </form>
                                     </td>
                                 </tr>
                             <?php endforeach ?>
