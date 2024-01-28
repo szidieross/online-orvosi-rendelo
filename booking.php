@@ -8,8 +8,9 @@ $id = isset($_GET['id']) ? $_GET["id"] : 0;
 
 $database = Database::getInstance();
 $doctorHandler = new DoctorController($database);
-
 $doctor = $doctorHandler->getDoctorById($id);
+$appointmentHandler = new AppointmentController($database);
+$availableAppointments = $appointmentHandler->getAppointmentByDoctorId($id);
 
 ?>
 
@@ -23,12 +24,13 @@ $doctor = $doctorHandler->getDoctorById($id);
 </head>
 
 <body>
-    <h2>Available Appointments</h2>
+    <h2>
+        <?php echo $doctor["first_name"] . " " . $doctor["last_name"]; ?>'s Available Appointments
+    </h2>
 
     <table>
         <thead>
             <tr>
-                <th>Doctor</th>
                 <th>Day</th>
                 <th>Appointment Time</th>
                 <th></th>
@@ -36,17 +38,11 @@ $doctor = $doctorHandler->getDoctorById($id);
         </thead>
         <tbody>
             <?php foreach ($availableAppointments as $appointment):
-                $appointmentDateTime['appointment_time'];
+                $appointmentDateTime = $appointment['appointment_time'];
                 $date = date("Y-m-d", strtotime($appointmentDateTime));
                 $time = date("H:i:s", strtotime($appointmentDateTime)); ?>
 
                 <tr>
-                    <td>
-                        <?php echo $appointment['first_name']; ?>
-                    </td>
-                    <td>
-                        <?php echo $appointment['last_name']; ?>
-                    </td>
                     <td>
                         <?php echo $date; ?>
                     </td>

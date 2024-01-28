@@ -71,7 +71,6 @@ class DoctorController
       
         if($result->num_rows>0){
             $doctor=$result->fetch_assoc();
-            var_dump($doctor);
             return $doctor;
         }
         return null;

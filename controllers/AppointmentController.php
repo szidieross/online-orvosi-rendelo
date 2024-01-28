@@ -15,5 +15,16 @@ class AppointmentController {
 
         echo "Az időpont sikeresen létrehozva!";
     }
+
+    public function getAllAppointments() {
+        $appointment = new Appointment($this->pdo);
+        $appointment->getAllAppointments();
+    }
+
+    public function getAppointmentByDoctorId($doctorId) {
+        $appointment = new Appointment($this->pdo);
+        $selectedAppointments=$appointment->getAppointmentByDoctorId($doctorId);
+        return $selectedAppointments;
+    }
 }
 ?>
