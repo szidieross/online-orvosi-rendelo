@@ -21,9 +21,10 @@ $appointmentHandler = new AppointmentController($database);
 $availableAppointments = $appointmentHandler->getAppointmentByDoctorId($id);
 
 if ($_SERVER['REQUEST_METHOD'] == "POST" && isset($_POST["book"])) {
-    $id = $_POST["appointmentId"];
+    $appointmentId = $_POST["appointmentId"];
 
-    $appointmentHandler->book($userId, $id);
+    $appointmentHandler->book($userId, $appointmentId);
+    $availableAppointments = $appointmentHandler->getAppointmentByDoctorId($id);
 }
 
 ?>
